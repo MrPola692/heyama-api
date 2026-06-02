@@ -1,0 +1,32 @@
+heyama-api
+│   src
+│   ├── objects
+│   │   ├── dto
+│   │   │   └── create-object.dto.ts
+│   │   ├── schemas
+│   │   │   └── object.schema.ts
+│   │   ├── objects.controller.spec.ts
+│   │   ├── objects.controller.ts
+│   │   ├── objects.gateway.spec.ts
+│   │   ├── objects.gateway.ts
+│   │   ├── objects.module.ts
+│   │   ├── objects.service.spec.ts
+│   │   └── objects.service.ts
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   └── main.ts
+│   test
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+│   .env
+│   .gitignore
+│   .prettierrc
+│   eslint.config.mjs
+│   nest-cli.json
+│   package-lock.json
+│   package.json
+│   README.md
+│   tsconfig.build.json
+│   tsconfig.json
