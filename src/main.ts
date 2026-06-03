@@ -12,7 +12,7 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'DELETE'],
   });
 
-  await app.listen(process.env.PORT ?? 3001);
+  await app.listen(process.env.PORT ?? 3001, '0.0.0.0');
   console.log(`API running on port ${process.env.PORT ?? 3001}`);
 }
 
