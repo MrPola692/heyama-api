@@ -54,12 +54,27 @@ export class ObjectsService {
     return withUrl;
   }
 
-  async findAll() {
-    const objects = await this.objectModel
-      .find()
-      .sort({ createdAt: -1 })
-      .lean();
-    return Promise.all(objects.map((o) => this.attachSignedUrl(o)));
+  async findAll(page = 1, limit = 10) {
+    const skip = (page - 1) * limit;
+    const [objects, total] = await Promise.all([
+      this.objectModel
+        .find()
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+      this.objectModel.countDocuments(),
+    ]);
+
+    const data = await Promise.all(objects.map((o) => this.attachSignedUrl(o)));
+
+    return {
+      data,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findOne(id: string) {
@@ -74,7 +89,7 @@ export class ObjectsService {
 
     await this.s3.send(
       new DeleteObjectCommand({
-        Bucket: process.env.B2_BUCKET_NAME as string,
+        Bucket: process.env.B2_BUCKET_NAME,
         Key: obj.imageKey,
       }),
     );
